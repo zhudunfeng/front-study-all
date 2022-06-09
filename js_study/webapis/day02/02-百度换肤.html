@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>百度换肤</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    body {
+      background: url(images/1.jpg) no-repeat center center;
+    }
+
+    .baidu {
+      /* 清除浮动 */
+      overflow: hidden;
+      width: 410px;
+      background-color: #fff;
+      margin: 100px auto;
+      padding-top: 3px;
+    }
+
+    .baidu li {
+      float: left;
+      margin: 0 1px;
+      cursor: pointer;
+    }
+
+    .baidu img {
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="baidu">
+    <ul>
+      <li><img src="images/1.jpg" alt=""></li>
+      <li><img src="images/2.jpg" alt=""></li>
+      <li><img src="images/3.jpg" alt=""></li>
+      <li><img src="images/4.jpg" alt=""></li>
+    </ul>
+  </div>
+
+  <script>
+    // 1. 获取元素 
+    let imgs = document.querySelector('.baidu').querySelectorAll('img');
+    // 2. 循环注册事件 
+    for (let i = 0; i < imgs.length; i++) {
+      imgs[i].onclick = function () {
+        document.body.style.backgroundImage = 'url(' + this.src + ')';
+      }
+    }
+  </script>
+</body>
+
+</html>

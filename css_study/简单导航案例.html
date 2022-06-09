@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简单导航案例</title>
+  <style>
+    /*1. 变化样式 有大小  一行显示  我们想到了 行内块元素*/
+    a {
+      /* a行内标签转换为行内块模式 */
+      display: inline-block;
+      background-color: pink;
+      width: 100px;
+      height: 30px;
+      /*行高等于高度 可以让单行文本呢垂直居中*/
+      line-height: 30px;
+      /* 文字水平居中 */
+      text-align: center;
+      color: #fff;
+      /* 去除下划线 */
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: orange;
+      color: #ff0;
+    }
+  </style>
+</head>
+<body>
+  <a href="#">新闻</a>
+  <a href="#">体育</a>
+  <a href="#">汽车</a>
+  <a href="#">游戏</a>
+
+</body>
+</html>

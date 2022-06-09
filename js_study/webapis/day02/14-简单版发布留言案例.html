@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留言板</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 400px;
+      margin: 0 auto;
+      background-color: orange;
+    }
+
+    textarea {
+      width: 200px;
+      height: 100px;
+      border: 1px solid pink;
+      outline: none;
+      resize: none;
+      vertical-align: top;
+    }
+
+    ul {
+      margin-top: 10px;
+    }
+
+    li {
+      width: 300px;
+      padding: 5px;
+      background-color: rgb(245, 209, 243);
+      color: red;
+      font-size: 14px;
+      margin: 15px 0;
+    }
+
+    li a {
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <button>发布</button>
+    <button>清空文本域</button>
+    <button>清空所有</button>
+    <ul></ul>
+  </div>
+
+  <script>
+    // 获取元素
+    let text = document.querySelector('textarea');
+    let btns = document.querySelectorAll('button');
+    let ul = document.querySelector('ul');
+
+    //绑定事件
+    btns[0].onclick = function () {
+      if (text.value == '') {
+        alert('您没有输入内容');
+        return false;
+      } else {
+        //(1)创建元素
+        let li = document.createElement('li');
+        li.innerHTML = text.value+ `<a href='javascript:;'>删除</a>`;
+        //(2)插入元素
+        // ul.appendChild(li);
+        ul.insertBefore(li, ul.children[0])
+        //(3)删除元素，删除的是当前链接的li  它的父亲
+        let as = document.querySelectorAll('a');
+        //循环绑定事件
+        for (let i = 0; i < as.length; i++) {
+          as[i].onclick = function () {
+            ul.removeChild(this.parentNode);
+          }
+        }
+      }
+    }
+
+     //清空文本域
+     btns[1].onclick = function () {
+      text.value='';
+    }
+
+    //清空所有
+    btns[2].onclick = function () {
+      text.value='';
+      let lis=ul.children;
+      while (lis.length>0){
+        ul.removeChild(lis[0])
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

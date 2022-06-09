@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>循环精灵图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    /*清除浮动*/
+    .clearfix:after {
+      visibility: hidden;
+      clear: both;
+      display: block;
+      content: ".";
+      height: 0
+    }
+
+    .clearfix {
+      *zoom: 1
+    }
+
+    li {
+      list-style-type: none;
+    }
+
+    .box {
+      width: 250px;
+      margin: 100px auto;
+    }
+
+    .box li {
+      float: left;
+      width: 24px;
+      height: 24px;
+      margin: 19px;
+      background: url(images/sprite.png) no-repeat;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box clearfix">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <script>
+    // 获取元素
+    let lis=document.querySelectorAll('li');
+    //注册事件，程序处理
+    for (let i = 0; i < lis.length; i++) {
+      let index=i*44;
+      lis[i].style.backgroundPosition='0 -'+index+'px';
+    }
+  </script>
+</body>
+
+</html>

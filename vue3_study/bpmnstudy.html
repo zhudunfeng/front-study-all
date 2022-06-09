@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pre-Bpmn</title>
+    <style>
+      li {
+        list-style: none;
+      }
+      #canvas {
+        margin: 200px auto;
+        border: 1px solid black;
+        background-color: white;
+        width: 80%;
+        height: 100%;
+        /* overflow: hidden; */
+      }
+      
+      .djs-container {
+        width: 100%;
+        height: 100%;
+        /* overflow: hidden; */
+      }
+
+      .djs-container svg {
+        margin: 10px 25%;
+        width: 50%;
+        height: 100%;
+        /* border: 1px solid black; */
+      }
+
+      .bjs-crumb a {
+        color: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BPMN diagram container -->
+    <div id="canvas"></div>
+
+    <!-- replace CDN url with local bpmn-js path -->
+    <script src="https://unpkg.com/bpmn-js/dist/bpmn-viewer.development.js"></script>
+    <script>
+      // the diagram you are going to display
+      const bpmnXML = `
+      <?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="a123456" name="会签测试" isExecutable="true">
+    <startEvent id="startEvent1">
+	 <extensionElements>
+        <activiti:executionListener event="start" class="com.activiti.listener.MyExectionListener"></activiti:executionListener>
+      </extensionElements>
+	</startEvent>
+    <userTask id="sid-528D45C4-01A0-4D61-AD5F-92F33B22CD2D" name="领导发起开会" activiti:assignee="#{leader}">
+      <extensionElements>
+        <activiti:executionListener event="end" class="com.activiti.listener.MyExectionListener"></activiti:executionListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://activiti.com/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-FAA08928-F8AB-40E0-B97C-DF9968909C03" sourceRef="startEvent1" targetRef="sid-528D45C4-01A0-4D61-AD5F-92F33B22CD2D"></sequenceFlow>
+    <userTask id="sid-A6232A37-E4AC-4FC3-8600-0F622A4188BD" name="开会人员签到（多实例）" activiti:assignee="#{assignee}">
+      <extensionElements>
+        <activiti:executionListener event="end" class="com.activiti.listener.MyExectionListener"></activiti:executionListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://activiti.com/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="assigneeOneList" activiti:elementVariable="assignee"></multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="sid-2CAEAD49-BEE9-4C9E-9231-6F8F762AADC9" sourceRef="sid-528D45C4-01A0-4D61-AD5F-92F33B22CD2D" targetRef="sid-A6232A37-E4AC-4FC3-8600-0F622A4188BD"></sequenceFlow>
+    <userTask id="sid-C3DDE568-8240-45FC-BB4D-B421A481DBFB" name="继续开会" activiti:assignee="#{assignee}">
+      <extensionElements>
+        <activiti:executionListener event="end" class="com.activiti.listener.MyExectionListener"></activiti:executionListener>
+        <modeler:initiator-can-complete xmlns:modeler="http://activiti.com/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="assigneeTwoList" activiti:elementVariable="assignee"></multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="sid-7E3A244E-8904-4ECC-A68B-F642C7A771DA" sourceRef="sid-A6232A37-E4AC-4FC3-8600-0F622A4188BD" targetRef="sid-C3DDE568-8240-45FC-BB4D-B421A481DBFB"></sequenceFlow>
+    <endEvent id="sid-02F30FB0-44E5-49A2-9435-8FBFF4F07B8B">
+	 <extensionElements>
+        <activiti:executionListener event="start" class="com.activiti.listener.MyExectionListener"></activiti:executionListener>
+      </extensionElements>
+	</endEvent>
+    <sequenceFlow id="sid-1931D6F0-9D83-4289-834D-5B384270C347" sourceRef="sid-C3DDE568-8240-45FC-BB4D-B421A481DBFB" targetRef="sid-02F30FB0-44E5-49A2-9435-8FBFF4F07B8B"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_a123456">
+    <bpmndi:BPMNPlane bpmnElement="a123456" id="BPMNPlane_a123456">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-528D45C4-01A0-4D61-AD5F-92F33B22CD2D" id="BPMNShape_sid-528D45C4-01A0-4D61-AD5F-92F33B22CD2D">
+        <omgdc:Bounds height="80.0" width="100.0" x="175.0" y="138.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-A6232A37-E4AC-4FC3-8600-0F622A4188BD" id="BPMNShape_sid-A6232A37-E4AC-4FC3-8600-0F622A4188BD">
+        <omgdc:Bounds height="80.0" width="100.0" x="315.0" y="135.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-C3DDE568-8240-45FC-BB4D-B421A481DBFB" id="BPMNShape_sid-C3DDE568-8240-45FC-BB4D-B421A481DBFB">
+        <omgdc:Bounds height="80.0" width="100.0" x="450.0" y="135.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-02F30FB0-44E5-49A2-9435-8FBFF4F07B8B" id="BPMNShape_sid-02F30FB0-44E5-49A2-9435-8FBFF4F07B8B">
+        <omgdc:Bounds height="28.0" width="28.0" x="605.0" y="161.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-FAA08928-F8AB-40E0-B97C-DF9968909C03" id="BPMNEdge_sid-FAA08928-F8AB-40E0-B97C-DF9968909C03">
+        <omgdi:waypoint x="130.0" y="178.0"></omgdi:waypoint>
+        <omgdi:waypoint x="175.0" y="178.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-1931D6F0-9D83-4289-834D-5B384270C347" id="BPMNEdge_sid-1931D6F0-9D83-4289-834D-5B384270C347">
+        <omgdi:waypoint x="550.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="605.0" y="175.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-7E3A244E-8904-4ECC-A68B-F642C7A771DA" id="BPMNEdge_sid-7E3A244E-8904-4ECC-A68B-F642C7A771DA">
+        <omgdi:waypoint x="415.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="450.0" y="175.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-2CAEAD49-BEE9-4C9E-9231-6F8F762AADC9" id="BPMNEdge_sid-2CAEAD49-BEE9-4C9E-9231-6F8F762AADC9">
+        <omgdi:waypoint x="275.0" y="176.92857142857144"></omgdi:waypoint>
+        <omgdi:waypoint x="315.0" y="176.07142857142856"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
+      `;
+
+      // BpmnJS is the BPMN viewer instance
+      const viewer = new BpmnJS({ container: "#canvas" });
+
+      // import a BPMN 2.0 diagram
+      try {
+        // we did well!
+        viewer.importXML(bpmnXML, function(err) {
+          if (err) {
+            console.error("something went wrong:", err);
+          } else {
+            console.log("successfully imported BPMN 2.0 diagram!");
+          }
+        });
+        viewer.get("canvas").zoom("fit-viewport");
+        //睡眠3s
+        const timer=setTimeout(() => {
+          viewer.get("canvas").zoom("fit-viewport");
+          console.log("睡眠3s");
+          
+        }, 3000);
+      } catch (err) {
+        // import failed
+      }
+    </script>
+  </body>
+</html>

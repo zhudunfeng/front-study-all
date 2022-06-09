@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5s自动关闭广告</title>
+</head>
+<body>
+  <script>
+    // window.onload 是窗口 (页面）加载事件，
+    // **当文档内容完全加载完成**会触发该事件(包括图像、脚本文件、CSS 文件等), 就调用的处理函数。
+    var timer= null;
+    window.addEventListener('load',function(){
+      let img = document.querySelector('img');
+      //定时5s关闭
+      timer = setTimeout(function(){
+        img.style.display='none';
+      },5000);
+    });
+    console.log(timer);
+    
+  </script>
+
+  <img src="images/ad.jpg" alt="">
+  
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片链接导航栏</title>
+    <style>
+      .nav  {
+        /*让里面的6个链接 居中对齐水平  这句话对 行内元素 行内块元素都有效果的*/
+        text-align: center;
+      }
+
+      .nav a {
+        /* 转为行内块，设置宽高 */
+        display: inline-block;
+        width: 120px;
+        height: 50px;
+        /* 垂直居中 */
+        line-height: 50px;
+        /* 去除下划线 */
+        text-decoration: none;
+        color:#fff;
+        /* background-color: pink; */
+        /* 使用背景图片 不平铺 左上角*/
+        background: url(images/bg.png) no-repeat left top;
+      }
+
+      /* 使用链接伪类选择器，鼠标移过 */
+      .nav a:hover {
+        background-image: url(images/bgc.png);
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <a href="#">网站首页</a>
+      <a href="#">网站首页</a>
+      <a href="#">网站首页</a>
+      <a href="#">网站首页</a>
+      <a href="#">网站首页</a>
+      <a href="#">网站首页</a>
+    </div>
+  </body>
+</html>

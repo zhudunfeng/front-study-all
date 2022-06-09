@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>14-简单动画函数封装</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box1 {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+    }
+
+    .box2 {
+      position: absolute;
+      top: 150px;
+      width: 150px;
+      height: 150px;
+      background-color: purple;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1">111</div>
+  <div class="box2">夏雨荷</div>
+
+  <script>
+    //获取元素
+    let box1 = document.getElementsByClassName('box1')[0];
+    let box2 = document.getElementsByClassName('box2')[0];
+
+    //添加点击事件
+    box1.addEventListener('click', function () {
+      animate(box1, 400)
+    });
+
+    function animate(obj, target) {
+      let timer = setInterval(function () {
+        if (obj.offsetLeft >= target) {
+          clearInterval(timer);
+          return false;
+        }
+        obj.style.left = obj.offsetLeft + 1 + 'px';
+      }, 25)
+    }
+
+
+
+  </script>
+</body>
+
+</html>

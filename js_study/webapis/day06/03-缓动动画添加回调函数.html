@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03-缓动动画添加回调函数</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+
+
+    .box2 {
+      position: absolute;
+      top: 100px;
+      width: 100px;
+      height: 100px;
+      background-color: purple;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="btn500">点击夏雨荷到500</button>
+  <button class="btn800">点击夏雨荷到800</button>
+  <div class="box2">夏雨荷</div>
+
+  <script>
+    //获取元素
+    let btns = document.querySelectorAll('button');
+    btn500 = btns[0];
+    btn800 = btns[1];
+    console.log(btn500);
+    console.log(btn800);
+
+    let box2 = document.querySelector('.box2');
+
+    //添加点击事件
+    btn500.addEventListener('click', function () {
+      animate(box2, 500);
+    });
+
+    btn800.addEventListener('click', function () {
+      animate(box2, 800,function() {
+        box2.style.backgroundColor = 'red';
+      });
+    });
+
+    // 缓动动画函数封装obj目标对象 target 目标位置
+    // 思路：
+    // 1. 让盒子每次移动的距离慢慢变小， 速度就会慢慢落下来。
+    // 2. 核心算法：(目标值 - 现在的位置) / 10 做为每次移动的距离 步长
+    // 3. 停止的条件是： 让当前盒子位置等于目标位置就停止定时器
+    function animate(obj, target,callback) {
+      // 先清除以前的定时器，只保留当前的一个定时器执行
+      clearInterval(obj.timer);
+      obj.timer = setInterval(function (e) {
+        let steps = (target - obj.offsetLeft) / 10;
+        //这里没有取绝对值
+        steps = steps > 0 ? Math.ceil(steps) : Math.floor(steps);
+        if (obj.offsetLeft == target) {
+          clearInterval(obj.timer);
+          // if(callback){
+          //   callback();
+          // }
+          //简写
+          callback && callback();
+        }
+        obj.style.left = obj.offsetLeft + steps + 'px';
+      }, 15)
+    }
+
+
+    // 匀速动画 就是 盒子是当前的位置 +  固定的值 10 
+    // 缓动动画就是  盒子当前的位置 + 变化的值(目标值 - 现在的位置) / 10）
+
+  </script>
+</body>
+
+</html>

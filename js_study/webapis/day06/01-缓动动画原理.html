@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动画函数</title>
+  <style>
+    div {
+      margin: 20px;
+    }
+
+    .box1 {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+    }
+
+    .box2 {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-color: purple;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1">111</div>
+
+  <script>
+    //获取元素
+    let box1 = document.getElementsByClassName('box1')[0];
+
+    //添加点击事件
+    box1.addEventListener('click', function () {
+      animate(box1, 400)
+    });
+
+
+    // 缓动动画函数封装obj目标对象 target 目标位置
+    // 思路：
+    // 1. 让盒子每次移动的距离慢慢变小， 速度就会慢慢落下来。
+    // 2. 核心算法：(目标值 - 现在的位置) / 10 做为每次移动的距离 步长
+    // 3. 停止的条件是： 让当前盒子位置等于目标位置就停止定时器
+    function animate(obj, target) {
+      obj.timer = setInterval(function () {
+        let steps = (target - obj.offsetLeft) / 10;
+        if (obj.offsetLeft >= target) {
+          clearInterval(obj.timer);
+        }
+        obj.style.left = obj.offsetLeft + steps + 'px';
+      }, 25)
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>

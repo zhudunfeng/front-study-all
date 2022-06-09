@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跟随鼠标</title>
+  <style>
+    img {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <img src="images/angel.gif" alt="">
+  <script>
+    let pic = document.querySelector('img');
+    console.dir(pic);
+
+    document.addEventListener('mousemove',function(e) {
+      // 1. mousemove只要我们鼠标移动1px 就会触发这个事件
+      //获取鼠标的坐标
+      // 2.核心原理： 每次鼠标移动，我们都会获得最新的鼠标坐标， 把这个x和y坐标做为图片的top和left 值就可以移动图片
+      let x = e.pageX;
+      let y = e.pageY;
+      
+      pic.style.left=x - (pic.width / 2)+'px';
+      pic.style.top=y - (pic.height / 2)+'px';
+    });
+  </script>
+</body>
+</html>

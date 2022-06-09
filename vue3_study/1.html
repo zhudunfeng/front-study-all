@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>九宫格</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .sudoku_row{
+            display: flex;
+            align-items: center;
+            width:100%;
+            flex-wrap: wrap;
+        }
+        .sudoku_item{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width:25%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .opacity{
+            opacity: 0.4;
+            background: #e5e5e5;
+        }
+        .sudoku_item img{
+            margin-bottom: 3px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="sudoku"  id="app">
+    <div class="sudoku_row"  >
+        <div class="sudoku_item " :class="curSelect==sudoku.id?'opacity':''" v-for="(index,sudoku) in sudokus" id="{{index}}" @touchstart="touchstart" @touchend="touchend">
+            <img :src="sudoku.img_src" width="40" height="40" >
+            {{sudoku.name}}
+        </div>
+    </div>
+</div>
+ 
+ 
+</body>
+<!-- 生产环境版本，优化了尺寸和速度 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            sudokus:[{
+                id:0,
+                name:'飞机',
+                img_src:'img/plane.png'
+            },{
+                id:1,
+                name:'游戏',
+                img_src:'img/game.png'
+            },{
+                id:2,
+                name:'音乐',
+                img_src:'img/music.png'
+            },{
+                id:3,
+                name:'物流',
+                img_src:'img/logistics.png'
+            },{
+                id:4,
+                name:'医院',
+                img_src:'img/hospital.png'
+            },{
+                id:5,
+                name:'医院',
+                img_src:'img/hospital.png'
+            },{
+                id:6,
+                name:'医院',
+                img_src:'img/hospital.png'
+            },{
+                id:7,
+                name:'医院',
+                img_src:'img/hospital.png'
+            },{
+                id:8,
+                name:'医院',
+                img_src:'img/hospital.png'
+            },{
+                id:9,
+                name:'医院',
+                img_src:'img/hospital.png'
+            },{
+                id:10,
+                name:'医院',
+                img_src:'img/hospital.png'
+            }],
+            curSelect:null
+        },methods:{
+            touchstart:function(e){
+                var that = this;
+                var id = parseInt(e.currentTarget.id), list = that.sudokus;
+                for (var i = 0, len = list.length; i < len; ++i) {
+                    if (list[i].id == id) {
+                        that.curSelect = i;
+                    }
+                }
+                setTimeout(function(){
+ 
+                },200)
+            },touchend:function(){
+                var that = this;
+                that.curSelect = null;
+            }
+        }
+    })
+</script>
+</html>
