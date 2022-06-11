@@ -48,7 +48,8 @@
       let moveX = e.targetTouches[0].pageX - startX;
       let moveY = e.targetTouches[0].pageY -startY;
       // 移动我们的盒子 盒子原来的位置 + 手指移动的距离
-      this.style.left = x + moveX + 'px';
+      // this.style.left = x + moveX + 'px';
+      this.style.left = (x + moveX)>=0?(x+moveX+'px'):(0+'px');
       this.style.top = y + moveY + 'px';
       e.preventDefault();
     });
