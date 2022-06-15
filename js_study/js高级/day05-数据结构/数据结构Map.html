@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据结构Map</title>
+</head>
+<body>
+  <script>
+     let myMap = new Map();
+      myMap.set("name", "张三");
+      myMap.set("age", 10);
+      console.log(myMap);
+      myMap.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      for (const key of myMap.keys()) {
+        console.log(key);
+      }
+      for (const value of myMap.values()) {
+        console.log(value);
+      }
+      for (const [key, value] of myMap.entries()) {
+        console.log(key, value);
+      }
+
+      let obj = {
+        username: '李四',
+        address: '北京'
+      };
+
+      let myNewMap = new Map(Object.entries(obj));
+      console.log(myNewMap);
+  </script>
+</body>
+</html>

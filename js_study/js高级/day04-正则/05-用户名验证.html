@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05-用户名验证</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    span {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .right {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" name="" id="" class="uname" /> <span>请输入用户名</span>
+  <script>
+    //  量词是设定某个模式出现的次数
+    var reg = /^[a-zA-Z0-9_-]{6,16}$/;
+
+    //获取元素
+    var uname = document.querySelector('.uname');
+    var span = document.querySelector('span');
+    //绑定事件
+    uname.addEventListener('blur', function () {
+      if (reg.test(this.value)) {
+        span.className = 'right';
+      } else {
+        span.className = 'error';
+      }
+    });
+
+    uname.addEventListener('keyup', function (e) {
+      if (e.keyCode == 13) {
+        if (reg.test(this.value)) {
+          span.className = 'right';
+        } else {
+          span.className = 'error';
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

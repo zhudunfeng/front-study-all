@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 用于获取对象自身所有的属性
+    let obj = {
+      id: 1,
+      pname: '小米',
+      price: 1999,
+      num: 2000,
+      say:function(){
+        // 普通函数的this指向当前实例
+        console.log(this.pname);
+      },
+      hello: () => {
+        //箭头函数因为大括号没有作用域，指向window
+        console.log(this.price);//输出undefined ,window中不存在price
+      }
+    };
+    Object.keys(obj).forEach(function(value) {
+      console.log(value,obj[value]);
+    });
+
+    // console.log({...obj,...obj});
+    obj.say();
+    obj.hello();
+    
+    // let [...arr] = [...obj];
+    // console.log(...obj);
+  </script>
+</body>
+
+</html>
