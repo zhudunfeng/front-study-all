@@ -1,4 +1,4 @@
-function animate(obj, target,callback) {
+function animate(obj, target, callback) {
   // 先清除以前的定时器，只保留当前的一个定时器执行
   clearInterval(obj.timer);
   obj.timer = setInterval(function (e) {

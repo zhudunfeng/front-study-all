@@ -1,5 +1,5 @@
 const path = require('path')
-//导入包
+//导入包（生成预览页面的插件）
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //创建对象
 const htmlPlugin = new HtmlWebpackPlugin({
@@ -30,7 +30,7 @@ module.exports = {
     }
   },
   plugins: [htmlPlugin, vueLoaderPlugin],
-  //配置loader
+  //配置loader（.webpack中的加载器）
   module: {
     rules: [
       {
@@ -56,14 +56,14 @@ module.exports = {
         //limit用来设置字节数，只有小于limit值的图片，才会转换
         //为base64图片
         type: 'javascript/auto',
-        use: {
+        use: [{
           loader: 'url-loader',
           options: {
             limit: 8 * 1024,
             esModule: false,
             name: '[hash:10].[ext]'
           }
-        }
+        }]
       },
       { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
       { test: /\.vue$/, use: 'vue-loader' }
