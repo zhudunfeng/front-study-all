@@ -18,37 +18,37 @@
       console.log("没有这个属性");
     }
 
-      //  判断一个字符串 'abcoefoxyozzopp' 中出现次数最多的字符，并统计其次数。
-      // o.a = 1
-      // o.b = 1
-      // o.c = 1
-      // o.o = 4
-      // 核心算法：利用 charAt(） 遍历这个字符串
-      // 把每个字符都存储给对象， 如果对象没有该属性，就为1，如果存在了就 +1
-      // 遍历对象，得到最大值和该字符
-      var str='abcoefoxyozzopp';
-      var o={};
-      for (let i = 0; i < str.length; i++) {
-        if(o[str.charAt(i)]){
-          o[str.charAt(i)]++;
-        }else{
-          o[str.charAt(i)]=1;
-        }
+    //  判断一个字符串 'abcoefoxyozzopp' 中出现次数最多的字符，并统计其次数。
+    // o.a = 1
+    // o.b = 1
+    // o.c = 1
+    // o.o = 4
+    // 核心算法：利用 charAt(） 遍历这个字符串
+    // 把每个字符都存储给对象， 如果对象没有该属性，就为1，如果存在了就 +1
+    // 遍历对象，得到最大值和该字符
+    var str = 'abcoefoxyozzopp';
+    var o = {};
+    for (let i = 0; i < str.length; i++) {
+      if (o[str.charAt(i)]) {
+        o[str.charAt(i)]++;
+      } else {
+        o[str.charAt(i)] = 1;
       }
+    }
 
-      var max=0;
-      var ch='';
-      
-      for (var key in o) {
-        if(o[key]>max){
-          max=o[key];
-          ch=key;
-        }
+    var max = 0;
+    var ch = '';
+
+    for (var key in o) {
+      if (o[key] > max) {
+        max = o[key];
+        ch = key;
       }
+    }
 
-      console.log('出现最多的字符:',ch,'\t次数:',max);
-      
-      
+    console.log('出现最多的字符:', ch, '\t次数:', max);
+
+
   </script>
 </head>
 
